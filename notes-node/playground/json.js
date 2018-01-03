@@ -5,11 +5,12 @@ var originalNote = {
   body: 'Some body'
 };
 
+// turning an objet into a string and creating a readable file with that string
 var originalNoteString = JSON.stringify(originalNote);
 fs.writeFileSync('notes.json', originalNoteString);
 
+// turning the string back into the JSON object
 var noteString = fs.readFileSync('notes.json');
-
 var note = JSON.parse(noteString);
 
 console.log(typeof note);
