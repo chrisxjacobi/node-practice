@@ -1,32 +1,35 @@
-// filled out addNotes function to work via command line, ensured duplicates would not be added, saved into new .json file
-
 console.log('Starting notes.js');
 
 const fs = require('fs');
 
-// creating static note variable
+var fetchNotes = () => {
+  try {
+    var notesString = fs.readFileSync('notes-data.json');
+    return JSON.parse(notesString);
+  } catch (e) {
+    return [];
+  };
+};
+
+var saveNotes = (notes) => {
+  fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+};
+
 var addNote = (title, body) => {
-  var notes = [];
+  var notes = fetchNotes();
   var note = {
     title,
     body
   };
 
-  // loading file and fetching notes, parsing data into notes variable
-  try {
-    var notesString = fs.readFileSync('notes-data.json');
-    notes = JSON.parse(notesString);
-  } catch (e) {}
-
-  // checking to see if a note title already exists and not adding it to notes array
   var duplicateNotes = notes.filter((note) => {
     return note.title === title;
   });
 
   if (duplicateNotes.length === 0) {
-    // updating data with a new note and save notes to screen
     notes.push(note);
-    fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+    saveNotes(notes);
+    return note;
   };
 
 };
@@ -40,8 +43,12 @@ var getNote = (title) => {
 };
 
 var removeNote = (title) => {
-  console.log('Removing note:', title);
-}
+  var notes = fetchNotes();
+  var filteredNotes = notes.filter((note) => note.title !== title);
+  saveNotes(filteredNotes);
+
+  return notes.length !== filteredNotes.length;
+};
 
 module.exports = {
   addNote,
@@ -49,3 +56,8 @@ module.exports = {
   getNote,
   removeNote
 };
+
+// loading file and fetching notes, parsing data into notes variable
+// creating static note variable
+// checking to see if a note title already exists and not adding it to notes array
+// updating data with a new note and save notes to screen

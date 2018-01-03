@@ -1,3 +1,5 @@
+// created utility functions for fetch note info in addition to saving new note in the .json file, completed removeNote function logic and logging of message whether or not a note is found to be removed
+
 console.log('Starting app.js');
 
 const fs = require('fs');
@@ -12,25 +14,31 @@ console.log('Command:', command);
 console.log('Yargs:', argv);
 
 if (command === 'add') {
-  notes.addNote(argv.title, argv.body);
+  var note = notes.addNote(argv.title, argv.body);
+
+  if (note) {
+    console.log('NOTE CREATED');
+    console.log('------');
+    console.log(`Title: ${note.title}`);
+    console.log(`Body: ${note.body}`);
+    console.log('------');
+  } else {
+    console.log('Unable to create note :(');
+  }
+
 } else if (command === 'list') {
   notes.getAll();
 } else if (command === 'read') {
   notes.getNote(argv.title);
 } else if (command === 'remove') {
-  notes.removeNote(argv.title);
+  var noteRemoved = notes.removeNote(argv.title);
+  var message = noteRemoved ? 'Note was removed' : 'Note not found';
+  console.log(message);
 } else {
   console.log('Command not recognized');
 }
 
-
-
-
-// 
-
-
-/*
-// testing lodash .uniq method
+/* // testing lodash .uniq method
 var filteredArray = _.uniq(['chris', 1, 'chris', 1, 2, 3, 4])
 console.log(filteredArray);
 
@@ -46,5 +54,4 @@ console.log('Result:', notes.add(7, 19));
 // testing node medthod os
 var user = os.userInfo();
 // testing node method appendFile
-fs.appendFileSync('greetings.txt', ` Hello ${user.username}! You are ${notes.age}.`);
-*/
+fs.appendFileSync('greetings.txt', ` Hello ${user.username}! You are ${notes.age}.`); */
