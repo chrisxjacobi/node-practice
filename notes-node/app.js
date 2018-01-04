@@ -1,4 +1,4 @@
-// created utility functions for fetch note info in addition to saving new note in the .json file, completed removeNote function logic and logging of message whether or not a note is found to be removed
+// created utility functions for fetch note info in addition to saving new note in the .json file, completed removeNote function logic and logging of message whether or not a note is found to be removed...created a 'read note' function to read the note featuring first matching title in the notes array, made utilit function for styling in the terminal
 
 console.log('Starting app.js');
 
@@ -18,18 +18,23 @@ if (command === 'add') {
 
   if (note) {
     console.log('NOTE CREATED');
-    console.log('------');
-    console.log(`Title: ${note.title}`);
-    console.log(`Body: ${note.body}`);
-    console.log('------');
+    notes.logNote(note);
   } else {
     console.log('Unable to create note :(');
   }
 
 } else if (command === 'list') {
   notes.getAll();
+
 } else if (command === 'read') {
-  notes.getNote(argv.title);
+  var note = notes.getNote(argv.title);
+  if (note) {
+    console.log('NOTE FOUND');
+    notes.logNote(note);
+  } else {
+    console.log('Note not found');
+  }
+
 } else if (command === 'remove') {
   var noteRemoved = notes.removeNote(argv.title);
   var message = noteRemoved ? 'Note was removed' : 'Note not found';
@@ -37,6 +42,8 @@ if (command === 'add') {
 } else {
   console.log('Command not recognized');
 }
+
+
 
 /* // testing lodash .uniq method
 var filteredArray = _.uniq(['chris', 1, 'chris', 1, 2, 3, 4])
