@@ -1,4 +1,4 @@
-// chained callbacks together to use either address or zip to print results object...practiced basic promises, also learned to chain promises and use 'catch' to provide one error message for any failure
+// 
 
 // google maps API key = AIzaSyAVOrV5-E0f-LY20p_aDdnTgn-k8RSolq0
 // forecast.io API = 9f1d9474a178bdf8328ea19d1c596051
