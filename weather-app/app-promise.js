@@ -39,3 +39,5 @@ axios.get(geocodeURL).then((response) => {
     console.log(e.message);
   }
 });
+
+// new features: load in more info from APIs, have default location
