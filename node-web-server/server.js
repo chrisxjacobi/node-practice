@@ -1,19 +1,25 @@
-// used templating/view engine (handlebars) to render html, used res.render to create pages and used property titles to display info on .hbs pages
+// learned partials to reuse parts in site, running nodemon server.js -e,hbs (to watch handlebars files), used helpers to use for dynamic data
 
 const express = require('express');
 const hbs = require('hbs');
 
 var app = express();
 
+hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 
-// render home.hbs, make new page, same h1, footer, 'welcome' in <p> tag as a new obj property
+hbs.registerHelper('getCurrentYear', () => {
+  return new Date().getFullYear()
+});
+
+hbs.registerHelper('screamIt', (text) => {
+  return text.toUpperCase();
+});
 
 app.get('/', (req, res) => {
   res.render('home.hbs', {
     pageTitle: 'Home Page',
-    currentYear: new Date().getFullYear(),
     welcomeMessage: 'Welcome to my home page!!!!'
   })
 });
@@ -21,7 +27,6 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'About Page',
-    currentYear: new Date().getFullYear()
   });
 });
 
