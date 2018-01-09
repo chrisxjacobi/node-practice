@@ -1,29 +1,29 @@
-// installed express, created a port, made basic .get/.send requests. also set up a static directory and added a basic html page
+// used templating/view engine (handlebars) to render html, used res.render to create pages and used property titles to display info on .hbs pages
 
 const express = require('express');
+const hbs = require('hbs');
 
 var app = express();
 
+app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 
+// render home.hbs, make new page, same h1, footer, 'welcome' in <p> tag as a new obj property
+
 app.get('/', (req, res) => {
-  //res.send('<h1>Hello Express!</h1>');
-  res.send({
-    name: 'Chris',
-    likes: [
-      'wrestling',
-      'cheeseburgers'
-    ]
+  res.render('home.hbs', {
+    pageTitle: 'Home Page',
+    currentYear: new Date().getFullYear(),
+    welcomeMessage: 'Welcome to my home page!!!!'
   })
 });
 
 app.get('/about', (req, res) => {
-  res.send('ABOUT PAGE');
+  res.render('about.hbs', {
+    pageTitle: 'About Page',
+    currentYear: new Date().getFullYear()
+  });
 });
-
-// create route at /bad
-// send back json with an error message property
-// navigate and make sure json shows up
 
 app.get('/bad', (req, res) => {
   res.send({
