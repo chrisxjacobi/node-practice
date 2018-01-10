@@ -1,4 +1,4 @@
-// tested maintenance middlewar with app.use
+// uploaded project on git via command line, set up heroku, made port dynamic on project, created and pushed app to heroku
 
 const express = require('express');
 const hbs = require('hbs');
