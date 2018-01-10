@@ -1,7 +1,25 @@
-// explored how to create a test suite with mocha, created a test case/script, updated package.json to test mocha with npm test
+// told nodemon to continue to run npm test with --exec, added a continuous watch to package.json...used expect assertion library to make code more compact...addressed problems with async tests using 'done' argument
 
-module.exports.add = (a, b) =>  a + b;
+module.exports.add = (a, b) => a + b;
 
-module.exports.square = (x) => {
-  return x * x;
+module.exports.asyncAdd = (a, b, callback) => {
+  setTimeout(() => {
+    callback(a + b);
+  }, 1000);
+};
+
+module.exports.square = (x) => x * x;
+
+module.exports.asyncSquare = (x, callback) => {
+  setTimeout(() => {
+    callback(x * x);
+  }, 1000);
+
+};
+
+module.exports.setName = (user, fullName) => {
+  var names = fullName.split(' ');
+  user.firstName = names[0];
+  user.lastName = names[1];
+  return user;
 };
