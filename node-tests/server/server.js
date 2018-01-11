@@ -1,4 +1,4 @@
-// used supertest chaining for continued testing with express apps, set a status on res.status(), passed a function into expect() that is called by supertest
+// put tests in 'describe' block to make them more readable in console...used spies to test functions
 
 const express = require('express');
 
