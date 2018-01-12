@@ -1,4 +1,4 @@
-// looked at randomly generated 12 bit IDs, getTimestamp() method, object destructuring to create a new ID
+// fetching data from database with .find(), .toArray() to get back document data, queries to access certain doc properties using KVPs, used .count() 
 
 /*
 var user = {
