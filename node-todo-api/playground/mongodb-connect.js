@@ -1,6 +1,22 @@
-// installed mongodb, robomongo/robo 3T, connected via command line as well as app, created 2 test collections
+// looked at randomly generated 12 bit IDs, getTimestamp() method, object destructuring to create a new ID
 
-const MongoClient = require('mongodb').MongoClient;
+/*
+var user = {
+  name: 'Chris',
+  age: 31
+}
+
+var {age} = user;
+console.log(age);
+*/
+
+// const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectID} = require('mongodb');
+
+/*
+var obj = new ObjectID();
+console.log(obj);
+*/
 
 MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   if (err) {
@@ -20,16 +36,16 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
 
   // insert new doc into a users collection with name, age, location
 
-  db.collection('Users').insertOne({
-    name: 'Chris',
-    age: 31,
-    location: 'Austin, TX'
-  }, (err, result) => {
-    if (err) {
-      return console.log('Unable to insert user');
-    }
-    console.log(JSON.stringify(result.ops, undefined, 2));
-  })
+  // db.collection('Users').insertOne({
+  //   name: 'Chris',
+  //   age: 31,
+  //   location: 'Austin, TX'
+  // }, (err, result) => {
+  //   if (err) {
+  //     return console.log('Unable to insert user');
+  //   }
+  //   console.log(JSON.stringify(result.ops[0]._id.getTimestamp()));
+  // })
 
   db.close();
 });
