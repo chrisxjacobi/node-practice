@@ -1,4 +1,4 @@
-// fetching data from database with .find(), .toArray() to get back document data, queries to access certain doc properties using KVPs, used .count() 
+// deleted document using deleteOne, deleteMany, findOneAndDelete... also used args to findOneAndUpdate a 
 
 /*
 var user = {
