@@ -1,4 +1,4 @@
-// set up mongoose model validation and defaults, created a new model, installed postman...created db and models folders and exported them to server, added express and body-parser, had errors setting up server
+// fixed server error by adding the .then to save function
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -17,12 +17,15 @@ app.post('/todos', (req, res) => {
     text: req.body.text
   });
 
-  todo.save((doc) => {
+  todo.save().then((doc) => {
     res.send(doc);
   }, (e) => {
     res.status(400).send(e);
   });
+
 });
+
+
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
