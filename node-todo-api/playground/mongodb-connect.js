@@ -1,4 +1,4 @@
-// deleted document using deleteOne, deleteMany, findOneAndDelete... also used args to findOneAndUpdate a 
+// deleted document using deleteOne, deleteMany, findOneAndDelete... also used args to findOneAndUpdate a field
 
 /*
 var user = {
