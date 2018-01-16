@@ -1,11 +1,11 @@
-// fixed server error by adding the .then to save function
+// added a server.test.js file along with mocha, supertest, and expect in package.json, testing lifecycle (beforeEach) to make sure database is empty before every test case, ran two tests
 
 const express = require('express');
 const bodyParser = require('body-parser');
 
 var {mongoose} = require('./db/mongoose.js')
-var {Todo} = require('./models/Todo');
-var {User} = require('./models/User');
+var {Todo} = require('./models/todo');
+var {User} = require('./models/user');
 
 var app = express();
 
@@ -30,3 +30,5 @@ app.post('/todos', (req, res) => {
 app.listen(3000, () => {
   console.log('Listening on port 3000');
 })
+
+module.exports = {app};
