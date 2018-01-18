@@ -1,4 +1,4 @@
-// added a server.test.js file along with mocha, supertest, and expect in package.json, testing lifecycle (beforeEach) to make sure database is empty before every test case, ran two tests
+// added GET /todos route, set up collection in postman...
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -25,10 +25,18 @@ app.post('/todos', (req, res) => {
 
 });
 
+app.get('/todos', (req, res) => {
+  Todo.find().then((todos) => {
+    res.send({todos});
+  }, (e) => {
+    res.status(400).send(e);
+  });
+});
+
 
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
-})
+});
 
 module.exports = {app};
