@@ -1,4 +1,4 @@
-// added GET /todos route, set up collection in postman...
+// used alternative mongoose queries (.find, .findOne, findById), handled errors, 
 
 const express = require('express');
 const bodyParser = require('body-parser');
