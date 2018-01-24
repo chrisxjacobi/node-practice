@@ -1,4 +1,4 @@
-// finished test suite for GET /todos:id
+// set up port to deploy on heroku, set up start script and node engine in package.json, used mLab mongodb service to integrate mongodb with heroku app, configed mongodo_uri
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -9,8 +9,8 @@ var {User} = require('./models/user');
 
 var {ObjectID} = require('mongodb');
 
-
 var app = express();
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -65,8 +65,8 @@ app.get('/todos/:id', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
 
 module.exports = {app};
