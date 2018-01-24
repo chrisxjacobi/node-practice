@@ -29,9 +29,6 @@ const {ObjectID} = require('mongodb');
 // }).catch((e) => console.log(e));
 
 
-
-var id = '5a5ba398f4290a20148677b3';
-
 User.findById(id).then((user) => {
   if (!user) {
     return console.log('User not found');
