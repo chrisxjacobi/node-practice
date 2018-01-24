@@ -1,4 +1,4 @@
-// used req.params to access id value, fixed ObjectID variable error, saved findById call and tested in postman
+// finished test suite for GET /todos:id
 
 const express = require('express');
 const bodyParser = require('body-parser');
