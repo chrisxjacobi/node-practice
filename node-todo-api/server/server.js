@@ -1,19 +1,18 @@
-// used req.params to access id value
+// used req.params to access id value, fixed ObjectID variable error, saved findById call and tested in postman
 
 const express = require('express');
 const bodyParser = require('body-parser');
-var {ObjectID} = require('mongodb');
 
 var {mongoose} = require('./db/mongoose.js')
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
+var {ObjectID} = require('mongodb');
+
 
 var app = express();
 
 app.use(bodyParser.json());
-
-var ObjectID =
 
 
 app.post('/todos', (req, res) => {
@@ -45,6 +44,18 @@ app.get('/todos/:id', (req, res) => {
     return res.status(404).send();
   }
 
+  Todo.findById(id).then((todo) => {
+    if (!todo) {
+      return res.status(404).send();
+    }
+
+    res.send({todo});
+  }).catch((e) => {
+    res.status(400).send()
+  }).catch((e) => {
+    res.status(400).send()
+  });
+
   // findById
     // success
       // if todo, send back
@@ -52,7 +63,6 @@ app.get('/todos/:id', (req, res) => {
     // error
       // 400, send empty body back
 });
-
 
 
 app.listen(3000, () => {
