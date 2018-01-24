@@ -1,4 +1,4 @@
-// set up port to deploy on heroku, set up start script and node engine in package.json, used mLab mongodb service to integrate mongodb with heroku app, configed mongodo_uri
+// set up port to deploy on heroku, set up start script and node engine in package.json, used mLab mongodb service to integrate mongodb with heroku app, configed mongodo_uri 
 
 const express = require('express');
 const bodyParser = require('body-parser');
