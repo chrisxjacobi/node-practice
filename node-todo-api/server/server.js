@@ -1,4 +1,4 @@
-// tested application push to herkou; does not work due to folder being in main app, but practiced mLab connections
+// 
 
 const express = require('express');
 const bodyParser = require('body-parser');
