@@ -3,7 +3,6 @@ const rewire = require('rewire');
 
 var app = rewire('./app');
 
-
 describe('App', () => {
   var db = {
     saveUser: expect.createSpy()
@@ -22,6 +21,6 @@ describe('App', () => {
 
     app.handleSignup(email, password);
     expect(db.saveUser).toHaveBeenCalledWith({email, password});
-  })
+  });
 
-})
+});

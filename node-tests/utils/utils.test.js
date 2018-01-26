@@ -29,12 +29,15 @@ describe('Utils', () => {
     expect(res).toBe(81).toBeA('number');
   });
 
-  it('should async-square a number', (done) => {
-    utils.asyncSquare(5, (total) => {
-      expect(total).toBe(25).toBeA('number');
-      done();
-    });
-})
+//   it('should async-square a number', (done) => {
+//     utils.asyncSquare(5, (total) => {
+//       expect(total).toBe(25).toBeA('number');
+//       done();
+//     });
+// })
+
+
+
   // if (res !== 81) {
   //   throw new Error(`Expected 81, but got ${res}.`);
   // }
