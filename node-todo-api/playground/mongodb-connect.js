@@ -1,5 +1,3 @@
-// deleted document using deleteOne, deleteMany, findOneAndDelete... also used args to findOneAndUpdate a field
-
 /*
 var user = {
   name: 'Chris',
@@ -33,8 +31,6 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   //   }
   //   console.log(JSON.stringify(result.ops, undefined, 2));
   // })
-
-  // insert new doc into a users collection with name, age, location
 
   // db.collection('Users').insertOne({
   //   name: 'Chris',

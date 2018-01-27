@@ -1,4 +1,4 @@
-// build mongo connection through command line, sql vs nosql syntax/vocabulary
+// connected/created new db with MongoClient, created new collections 
 
 const express = require('express');
 const bodyParser = require('body-parser');
