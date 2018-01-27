@@ -1,4 +1,4 @@
-// 
+// build mongo connection through command line, sql vs nosql syntax/vocabulary
 
 const express = require('express');
 const bodyParser = require('body-parser');
