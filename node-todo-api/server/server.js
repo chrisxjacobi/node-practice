@@ -1,4 +1,4 @@
-// reviewing deleting documents in a collection 
+// reviewed $set and $inc update scripts, installation and connection to mongoose via our URL, reviewed making a mongoose model and tested saving to database and collection
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -56,12 +56,7 @@ app.get('/todos/:id', (req, res) => {
     res.status(400).send()
   });
 
-  // findById
-    // success
-      // if todo, send back
-      // if no todo, send back 404 with empty body
-    // error
-      // 400, send empty body back
+
 });
 
 
