@@ -28,3 +28,22 @@ module.exports = {Todo};
 // }, (e) => {
 //   console.log('unable to save todo');
 // })
+
+// var User = mongoose.model('User', {
+//   email: {
+//     type: String,
+//     required: true,
+//     trim: true,
+//     minlength: 1
+//   }
+// })
+
+// var newUser = new User({
+//   email: 'abc123@yahoo.com'
+// });
+//
+// newUser.save().then((doc) => {
+//   console.log('user saved', doc);
+// }, (e) => {
+//   console.log('error:', e);
+// })

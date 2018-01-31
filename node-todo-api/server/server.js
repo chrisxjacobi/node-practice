@@ -1,4 +1,4 @@
-// reviewed $set and $inc update scripts, installation and connection to mongoose via our URL, reviewed making a mongoose model and tested saving to database and collection
+// using validators so empty models are not saved/tested a model, 
 
 const express = require('express');
 const bodyParser = require('body-parser');
