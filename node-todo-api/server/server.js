@@ -1,4 +1,4 @@
-// connected/created new db with MongoClient, created new collections 
+// reviewing deleting documents in a collection 
 
 const express = require('express');
 const bodyParser = require('body-parser');
