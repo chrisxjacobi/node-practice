@@ -1,4 +1,4 @@
-// using validators so empty models are not saved/tested a model, 
+//
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-
+// for creating a new todo
 app.post('/todos', (req, res) => {
   var todo = new Todo({
     text: req.body.text
@@ -28,6 +28,7 @@ app.post('/todos', (req, res) => {
 
 });
 
+// for reading todos (or reading todo by id)
 app.get('/todos', (req, res) => {
   Todo.find().then((todos) => {
     res.send({todos});
