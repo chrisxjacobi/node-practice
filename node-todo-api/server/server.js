@@ -1,4 +1,4 @@
-//
+// reviewing test cases (item creation & invalid body data), installation of mocha, expect, and supertest
 
 const express = require('express');
 const bodyParser = require('body-parser');
