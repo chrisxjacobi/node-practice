@@ -1,4 +1,4 @@
-// reviewing test cases (item creation & invalid body data), installation of mocha, expect, and supertest
+// ensured that todos are filled with dummy data when starting app so that array isnt cleared (seed data)
 
 const express = require('express');
 const bodyParser = require('body-parser');

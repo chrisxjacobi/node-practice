@@ -5,6 +5,7 @@ const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 const {ObjectID} = require('mongodb');
 
+// creating dummy array so todos aren't cleared when starting tests
 const todos = [{
   _id: new ObjectID(),
   text: 'First test todo'
@@ -55,7 +56,7 @@ describe('POST /todos', () => {
         }
 
         Todo.find().then((todos) => {
-          expect(todos.length).toBe(0);
+          expect(todos.length).toBe(2);
           done();
         }).catch((e) => done(e));
       })
@@ -74,7 +75,7 @@ describe('GET /todos', () => {
   });
 });
 
-describe('Get /todos/:id', () => {
+describe('GET /todos/:id', () => {
   it('should return todo doc', (done) => {
     request(app)
       .get(`/todos/${todos[0]._id.toHexString()}`)
