@@ -28,37 +28,37 @@ app.post('/todos', (req, res) => {
 
 });
 
-// for reading todos (or reading todo by id)
+// for fetching/reading todos
 app.get('/todos', (req, res) => {
   Todo.find().then((todos) => {
-    res.send({todos});
+    res.send({todos}); // send as object to later add other properties
   }, (e) => {
     res.status(400).send(e);
   });
 });
 
-// Get /todos/12345
-app.get('/todos/:id', (req, res) => {
-  var id = req.params.id;
-
-  if (!ObjectID.isValid(id)) {
-    return res.status(404).send();
-  }
-
-  Todo.findById(id).then((todo) => {
-    if (!todo) {
-      return res.status(404).send();
-    }
-
-    res.send({todo});
-  }).catch((e) => {
-    res.status(400).send()
-  }).catch((e) => {
-    res.status(400).send()
-  });
-
-
-});
+// // Get /todos/or reading todo by id
+// app.get('/todos/:id', (req, res) => {
+//   var id = req.params.id;
+//
+//   if (!ObjectID.isValid(id)) {
+//     return res.status(404).send();
+//   }
+//
+//   Todo.findById(id).then((todo) => {
+//     if (!todo) {
+//       return res.status(404).send();
+//     }
+//
+//     res.send({todo});
+//   }).catch((e) => {
+//     res.status(400).send()
+//   }).catch((e) => {
+//     res.status(400).send()
+//   });
+//
+//
+// });
 
 
 app.listen(port, () => {
