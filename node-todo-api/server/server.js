@@ -1,4 +1,4 @@
-// reviewed setting environment port variable (if on URL), start/engine scripts, mLab to set up MONGODB_URI (aka database url), viewed app live in heroku via postman/heroku app 
+// created/managed environments in postman for either local or web url by using a handlebar-like injection {{url}}/todos/ ...etc 
 
 const express = require('express');
 const bodyParser = require('body-parser');
