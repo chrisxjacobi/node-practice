@@ -1,4 +1,4 @@
-// researched mongoose queries (find, findOne, findById) and loaded ObjectID to see if id was valid
+// created a todoById route using the id property of params, used .toHexString() to convert an ObjectID to be passed into as URL, added test cases for the id/if not found/if doesnt exist
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,7 +7,7 @@ var {mongoose} = require('./db/mongoose.js')
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
-var {ObjectID} = require('mongodb');
+var {ObjectID} = require('mongodb'); // importing to make sure id is valid
 
 var app = express();
 const port = process.env.PORT || 3000;
@@ -37,28 +37,25 @@ app.get('/todos', (req, res) => {
   });
 });
 
-// // Get /todos/or reading todo by id
-// app.get('/todos/:id', (req, res) => {
-//   var id = req.params.id;
-//
-//   if (!ObjectID.isValid(id)) {
-//     return res.status(404).send();
-//   }
-//
-//   Todo.findById(id).then((todo) => {
-//     if (!todo) {
-//       return res.status(404).send();
-//     }
-//
-//     res.send({todo});
-//   }).catch((e) => {
-//     res.status(400).send()
-//   }).catch((e) => {
-//     res.status(400).send()
-//   });
-//
-//
-// });
+// GET /todos/or reading todo by id
+app.get('/todos/:id', (req, res) => {
+  var id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Todo.findById(id).then((todo) => {
+    if (!todo) {
+      return res.status(404).send();  // if no todoy, send back 404 with empty body
+    }
+
+    res.send({todo}); // send back todo
+  }).catch((e) => {
+    res.status(400).send()
+  });
+
+});
 
 
 app.listen(port, () => {
