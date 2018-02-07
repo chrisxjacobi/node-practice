@@ -1,4 +1,4 @@
-// created a todoById route using the id property of params, used .toHexString() to convert an ObjectID to be passed into as URL, added test cases for the id/if not found/if doesnt exist
+// reviewed setting environment port variable (if on URL), start/engine scripts, mLab to set up MONGODB_URI (aka database url), viewed app live in heroku via postman/heroku app 
 
 const express = require('express');
 const bodyParser = require('body-parser');
