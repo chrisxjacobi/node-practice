@@ -28,10 +28,11 @@ const {ObjectID} = require('mongodb');
 //   console.log('Todo By Id: ', todo);
 // }).catch((e) => console.log(e));
 
-
-User.findById(id).then((user) => {
+User.findById('5a5baa170f2ad6311583dcbf').then((user) => {
   if (!user) {
-    return console.log('User not found');
+    return console.log('unable to find user');
   }
-  console.log('User by ID:', user);
-}).catch((e) => console.log(e));
+  console.log(JSON.stringify(user, undefined, 2));
+}, (e) => {
+  console.log(e);
+})

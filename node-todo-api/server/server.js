@@ -1,4 +1,4 @@
-// ensured that todos are filled with dummy data when starting app so that array isnt cleared (seed data)
+// researched mongoose queries (find, findOne, findById) and loaded ObjectID to see if id was valid
 
 const express = require('express');
 const bodyParser = require('body-parser');
