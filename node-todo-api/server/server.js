@@ -1,4 +1,4 @@
-// created/managed environments in postman for either local or web url by using a handlebar-like injection {{url}}/todos/ ...etc 
+// used mongoose to remove a todo by id, successfully added route in server, and saved delete route template in postman. added tests for deleting a todo in addition to if it is not found or ObjectID is invalid
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -53,6 +53,25 @@ app.get('/todos/:id', (req, res) => {
     res.send({todo}); // send back todo
   }).catch((e) => {
     res.status(400).send()
+  });
+
+});
+
+app.delete('/todos/:id', (req, res) => {
+  var id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Todo.findByIdAndRemove(id).then((todo) => {
+    if (!todo) {
+      return res.status(404).send();
+    }
+
+    res.send({todo});
+  }).catch((e) => {
+    res.status(400).send();
   });
 
 });
