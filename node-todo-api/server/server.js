@@ -1,4 +1,4 @@
-// used patch testing, configured .NODE_ENV for herkou/local/mocha environments, set environment variables with an if/else statement, put code in config folder and file
+// 
 
 require('./config/config.js');
 
@@ -104,8 +104,24 @@ app.patch('/todos/:id', (req, res) => {
   }).catch((e) => {
     res.status(400).send();
   })
-
 });
+
+// POST /users route for creating a new user, .pick email and password props, then call save
+
+  app.post('/users', (req, res) => {
+    var body = _.pick(req.body, ['email', 'password']);
+    var user = new User(body);
+
+    user.save().then((user) => {
+      res.send(user);
+    }).catch((e) => {
+      res.status(400).send(e);
+    })
+});
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
