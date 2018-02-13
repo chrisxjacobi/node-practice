@@ -1,7 +1,8 @@
-// used mongoose to remove a todo by id, successfully added route in server, and saved delete route template in postman. added tests for deleting a todo in addition to if it is not found or ObjectID is invalid
+// used a patch (update) route for single ids, used and tested in postman, saved in environment
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const _ = require('lodash');
 
 var {mongoose} = require('./db/mongoose.js')
 var {Todo} = require('./models/todo');
@@ -47,7 +48,7 @@ app.get('/todos/:id', (req, res) => {
 
   Todo.findById(id).then((todo) => {
     if (!todo) {
-      return res.status(404).send();  // if no todoy, send back 404 with empty body
+      return res.status(404).send();  // if no todo, send back 404 with empty body
     }
 
     res.send({todo}); // send back todo
@@ -57,6 +58,7 @@ app.get('/todos/:id', (req, res) => {
 
 });
 
+// DELETE route to delete by id
 app.delete('/todos/:id', (req, res) => {
   var id = req.params.id;
 
@@ -75,6 +77,35 @@ app.delete('/todos/:id', (req, res) => {
   });
 
 });
+
+// UPDATE by id
+app.patch('/todos/:id', (req, res) => {
+  var id = req.params.id;
+  var body = _.pick(req.body, ['text', 'completed']);
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  if (_.isBoolean(body.completed) && body.completed) {
+    body.completedAt = new Date().getTime(); // returns JS time object
+  } else {
+    body.completed = false;
+    body.completedAt = null;
+  }
+
+  Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
+    if (!todo) {
+      return res.status(404).send();
+    }
+    res.send({todo});
+  }).catch((e) => {
+    res.status(400).send();
+  })
+
+});
+
+
 
 
 app.listen(port, () => {
