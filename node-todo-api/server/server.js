@@ -1,4 +1,6 @@
-// used a patch (update) route for single ids, used and tested in postman, saved in environment
+// used patch testing, configured .NODE_ENV for herkou/local/mocha environments, set environment variables with an if/else statement, put code in config folder and file
+
+require('./config/config.js');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -11,7 +13,7 @@ var {User} = require('./models/user');
 var {ObjectID} = require('mongodb'); // importing to make sure id is valid
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -104,9 +106,6 @@ app.patch('/todos/:id', (req, res) => {
   })
 
 });
-
-
-
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
