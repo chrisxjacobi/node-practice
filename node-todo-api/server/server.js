@@ -1,4 +1,4 @@
-// 
+// discovered hashing and salting using npm modules crypto-js & jsonwebtoken
 
 require('./config/config.js');
 
