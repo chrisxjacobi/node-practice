@@ -1,4 +1,4 @@
-// discovered hashing and salting using npm modules crypto-js & jsonwebtoken
+// changed User model to a new mongoose schema, added two methods (generateAuthToken(), which saved generated jwt tokens, and toJSON(), which specified properties to return (only _id and email, leaving out password/tokens/etc)), returned methods in post route and set x-auth (token) in our header when we make a request
 
 require('./config/config.js');
 
@@ -6,11 +6,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 
-var {mongoose} = require('./db/mongoose.js')
-var {Todo} = require('./models/todo');
-var {User} = require('./models/user');
+var {
+  mongoose
+} = require('./db/mongoose.js')
+var {
+  Todo
+} = require('./models/todo');
+var {
+  User
+} = require('./models/user');
 
-var {ObjectID} = require('mongodb'); // importing to make sure id is valid
+var {
+  ObjectID
+} = require('mongodb'); // importing to make sure id is valid
 
 var app = express();
 const port = process.env.PORT;
@@ -19,9 +27,7 @@ app.use(bodyParser.json());
 
 // for creating a new todo
 app.post('/todos', (req, res) => {
-  var todo = new Todo({
-    text: req.body.text
-  });
+  var todo = new Todo({text: req.body.text});
 
   todo.save().then((doc) => {
     res.send(doc);
@@ -50,7 +56,7 @@ app.get('/todos/:id', (req, res) => {
 
   Todo.findById(id).then((todo) => {
     if (!todo) {
-      return res.status(404).send();  // if no todo, send back 404 with empty body
+      return res.status(404).send(); // if no todo, send back 404 with empty body
     }
 
     res.send({todo}); // send back todo
@@ -96,7 +102,9 @@ app.patch('/todos/:id', (req, res) => {
     body.completedAt = null;
   }
 
-  Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
+  Todo.findByIdAndUpdate(id, {
+    $set: body
+  }, {new: true}).then((todo) => {
     if (!todo) {
       return res.status(404).send();
     }
@@ -108,23 +116,23 @@ app.patch('/todos/:id', (req, res) => {
 
 // POST /users route for creating a new user, .pick email and password props, then call save
 
-  app.post('/users', (req, res) => {
-    var body = _.pick(req.body, ['email', 'password']);
-    var user = new User(body);
+app.post('/users', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+  var user = new User(body);
 
-    user.save().then((user) => {
-      res.send(user);
-    }).catch((e) => {
-      res.status(400).send(e);
-    })
+  user.save().then(() => {
+    return user.generateAuthToken();
+  }).then((token) => {
+    res.header('x-auth', token).send(user);
+  }).catch((e) => {
+    res.status(400).send(e);
+  })
 });
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-module.exports = {app};
+module.exports = {
+  app
+};
