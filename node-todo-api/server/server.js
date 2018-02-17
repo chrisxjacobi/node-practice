@@ -1,4 +1,4 @@
-// changed User model to a new mongoose schema, added two methods (generateAuthToken(), which saved generated jwt tokens, and toJSON(), which specified properties to return (only _id and email, leaving out password/tokens/etc)), returned methods in post route and set x-auth (token) in our header when we make a request
+// 
 
 require('./config/config.js');
 
@@ -6,19 +6,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 
-var {
-  mongoose
-} = require('./db/mongoose.js')
-var {
-  Todo
-} = require('./models/todo');
-var {
-  User
-} = require('./models/user');
+var {mongoose} = require('./db/mongoose.js')
+var {Todo} = require('./models/todo');
+var {User} = require('./models/user');
+var {authenticate} = require('./middleware/authenticate');
 
-var {
-  ObjectID
-} = require('mongodb'); // importing to make sure id is valid
+var {ObjectID} = require('mongodb'); // importing to make sure id is valid
 
 var app = express();
 const port = process.env.PORT;
@@ -114,7 +107,7 @@ app.patch('/todos/:id', (req, res) => {
   })
 });
 
-// POST /users route for creating a new user, .pick email and password props, then call save
+// POST /users
 
 app.post('/users', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
@@ -128,6 +121,11 @@ app.post('/users', (req, res) => {
     res.status(400).send(e);
   })
 });
+
+
+app.get('/users/me', authenticate, (req, res) => {
+  res.send(req.user);
+})
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
