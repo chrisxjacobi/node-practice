@@ -1,4 +1,4 @@
-// used bcrypt to hash plain text passwords, added a schema.pre method to ensure that the user altered a password BEFORE it was saved in the database which would result in the database saving the password as a hash
+// added new seed folder/file and ensured tests still ran, added a populateUsers function to create two seed/dummy users for testing purposes
 
 require('./config/config.js');
 
