@@ -1,4 +1,4 @@
-// added new seed folder/file and ensured tests still ran, added a populateUsers function to create two seed/dummy users for testing purposes
+// wrote tests for auth/non-auth users and set the x-auth header, tests for creating a user, and duplicate email error
 
 require('./config/config.js');
 
