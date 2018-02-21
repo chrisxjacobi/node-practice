@@ -1,4 +1,4 @@
-// wrote tests for auth/non-auth users and set the x-auth header, tests for creating a user, and duplicate email error
+// set up dedicated route for user login, used a findByCredentials method, checked to see if the user was active, used bcrypt to compare hashed password to the user created password, used x-auth header to view (in postman) that we retrieved the correct user!
 
 require('./config/config.js');
 
@@ -126,6 +126,20 @@ app.post('/users', (req, res) => {
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
 })
+
+// post /users/login (email, password) respond with body data
+
+app.post('/users/login', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+
+  User.findByCredentials(body.email, body.password).then((user) => {
+    return user.generateAuthToken().then((token) => {
+      res.header('x-auth', token).send(user);
+    })
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
