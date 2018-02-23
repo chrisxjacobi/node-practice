@@ -249,4 +249,14 @@ describe('POST /users', () => {
       .expect(400)
       .end(done)
   });
+});
+
+describe('POST /users/login', () => {
+  it('should login user and return auth token', (done) => {
+
+  });
+
+  it('should reject invalid login', (done) => {
+
+  });
 })

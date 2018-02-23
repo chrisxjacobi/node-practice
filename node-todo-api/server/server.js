@@ -1,4 +1,4 @@
-// set up dedicated route for user login, used a findByCredentials method, checked to see if the user was active, used bcrypt to compare hashed password to the user created password, used x-auth header to view (in postman) that we retrieved the correct user!
+// 
 
 require('./config/config.js');
 
