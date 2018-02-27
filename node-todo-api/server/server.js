@@ -1,4 +1,4 @@
-// 
+// writing tests for logging in a user and returning auth as well as rejecting an invalid logins
 
 require('./config/config.js');
 
