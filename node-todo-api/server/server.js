@@ -1,4 +1,4 @@
-// wrote DELETE /users/me/token test case
+// 
 
 require('./config/config.js');
 
