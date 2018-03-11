@@ -1,4 +1,4 @@
-// 
+//
 
 require('./config/config.js');
 
@@ -107,8 +107,13 @@ app.patch('/todos/:id', (req, res) => {
   })
 });
 
-// POST /users
 
+
+/* ***** USERS  SECTION ****** */
+
+
+
+// POST /users
 app.post('/users', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
   var user = new User(body);
@@ -127,7 +132,7 @@ app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
 })
 
-// post /users/login (email, password) respond with body data
+// POST /users/login (email, password) respond with body data
 
 app.post('/users/login', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);

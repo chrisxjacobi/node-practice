@@ -4,6 +4,10 @@ const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const bcrypt = require('bcryptjs');
 
+// tokens is an array of objects (each a login token).
+  // access is type
+  // token is value (secure string) that validates access
+
 var UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -21,8 +25,7 @@ var UserSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
-  tokens: [
-    {
+  tokens: [{
       access: {
         type: String,
         required: true
@@ -31,8 +34,7 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
       }
-    }
-  ]
+    }]
 });
 
 UserSchema.methods.toJSON = function () {
