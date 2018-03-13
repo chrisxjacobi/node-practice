@@ -1,4 +1,4 @@
-//
+// reviewing authentication middleware and fetching currently authenticated user
 
 require('./config/config.js');
 
