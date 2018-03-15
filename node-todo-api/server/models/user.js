@@ -106,8 +106,6 @@ UserSchema.statics.findByCredentials = function (email, password) {
   })
 };
 
-
-
 UserSchema.pre('save', function (next) {
   var user = this;
 
