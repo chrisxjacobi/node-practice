@@ -50,7 +50,7 @@ UserSchema.methods.generateAuthToken = function () {
   var token = jwt.sign({
     _id: user._id.toHexString(), access}, 'abc123').toString();
 
-  user.tokens.push({access, token});
+  user.tokens = user.tokens.concat([{access, token}]);
 
   return user.save().then(() => {
     return token;
@@ -93,7 +93,6 @@ UserSchema.statics.findByCredentials = function (email, password) {
     }
 
     return new Promise((resolve, reject) => {
-      // use bottom to compare password and user.password
 
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {

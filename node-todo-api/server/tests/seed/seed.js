@@ -17,7 +17,11 @@ const users = [{
 }, {
   _id: userTwoId,
   email: 'michelle@example.com',
-  password: 'userTwoPass'
+  password: 'userTwoPass',
+  tokens: [{
+    access: 'auth',
+    token: jwt.sign({_id: userTwoId, access: 'auth'}, 'abc123').toString()
+  }]
 }];
 
 // creating dummy array so todos aren't cleared when starting tests
