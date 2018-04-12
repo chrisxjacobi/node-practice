@@ -1,4 +1,4 @@
-// created a system to manage current environment variables, created random JWT secret variable in appropriate files, reviewed how to set and manage env variables in heroku
+// 
 
 require('./config/config.js');
 
